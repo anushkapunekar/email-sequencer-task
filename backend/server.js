@@ -4,9 +4,14 @@ import authRoutes from './src/api/routes/auth/authRoutes.js';
 import emailSequenceRoutes from './src/api/routes/emailSequence/emailSeqRoutes.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Log JWT to verify if it's loaded from .env
 console.log(process.env.JWT);
@@ -21,8 +26,13 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'frontend','build')));
 
 console.log('Middleware set up');
+
+app.get('*' , (req,res)=> {
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+})
 
 // Health check route
 app.get('/api/health', (req, res) => {

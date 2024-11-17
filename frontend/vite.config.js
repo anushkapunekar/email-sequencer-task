@@ -12,4 +12,9 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/hooks'), 
     },
   },
+  server: {
+    proxy:{
+      '/api': 'http://localhost:3000',
+    },
+  },
 });
