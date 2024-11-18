@@ -3,12 +3,10 @@
     "concurrently": "^9.1.0"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd backend && npm start",  
+    "start": "npx concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm start",
     "client": "cd frontend && npm run dev"
-
   },
-
   "dependencies": {
     "dotenv": "^16.4.5"
   }
